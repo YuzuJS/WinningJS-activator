@@ -1,6 +1,6 @@
 {
     "name": "winningjs-activator",
-    "description": "Activates Windows 8 applications from the command line",
+    "description": "Activates Windows 8 applications from Node.js or the command line",
     "version": "1.0.0",
     "author": "Domenic Denicola <domenic@domenicdenicola.com> (http://domenicdenicola.com)",
     "license": "MIT",

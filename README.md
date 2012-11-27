@@ -1,6 +1,6 @@
-# Activates Windows 8 Applications
+# Activate Windows 8 Applications
 
-This is a simple command-line app and/or Node.js library that activates a Windows 8 application. It takes as its sole
+This is a simple Node.js library and/or command-line tool that activates a Windows 8 application. It takes as its sole
 parameter an “application user model ID,” which is a somewhat-cryptic string that identifies apps throughout Windows 8.
 
 You can use it from JavaScript like so:
