@@ -1,7 +1,7 @@
-/Debug/
-/Release/
-*.opensdf
-*.sdf
-*.suo
-*.vcxproj.user
-*.vcxproj.filters
+/src/Debug/
+/src/Release/
+/src/*.opensdf
+/src/*.sdf
+/src/*.suo
+/src/*.vcxproj.user
+/src/*.vcxproj.filters
