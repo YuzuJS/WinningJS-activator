@@ -1,0 +1,17 @@
+{
+    "name": "WinningJS-activator",
+    "description": "Activates Windows 8 applications from the command line",
+    "version": "1.0.0",
+    "author": "Domenic Denicola <domenic@domenicdenicola.com> (http://domenicdenicola.com)",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/NobleJS/WinningJS-activator.git"
+    },
+    "bugs": {
+        "url": "http://github.com/NobleJS/WinningJS-activator/issues"
+    },
+    "scripts": {
+        "preinstall": "install.cmd"
+    }
+}
