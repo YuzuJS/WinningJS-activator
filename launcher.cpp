@@ -1,6 +1,16 @@
 #include <ShObjIdl.h>
-#include <atlbase.h>
 #include <wchar.h>
+
+HRESULT CreateAAM(IApplicationActivationManager*& aam)
+{
+    return CoCreateInstance(CLSID_ApplicationActivationManager, nullptr, CLSCTX_LOCAL_SERVER, IID_PPV_ARGS(&aam));
+}
+
+HRESULT ActivateApp(IApplicationActivationManager* aam, const wchar_t* appId)
+{
+    unsigned long unused = 0;
+    return aam->ActivateApplication(appId, nullptr, AO_NONE, &unused);
+}
 
 int wmain(int argc, wchar_t* argv[])
 {
@@ -10,44 +20,44 @@ int wmain(int argc, wchar_t* argv[])
     {
         hr = E_INVALIDARG;
         wprintf(L"Supply an app ID (AppUserModelId) for the application to launch.");
-        return hr;
     }
-
-    const wchar_t* appId = argv[1];
-
-    hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-    if (FAILED(hr))
+    else
     {
-        wprintf(L"Error initializing COM");
-        return hr;
+        hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+        if (FAILED(hr))
+        {
+            wprintf(L"Error initializing COM");
+        }
+        else
+        {
+            IApplicationActivationManager* aam = nullptr;
+            hr = CreateAAM(aam);
+            if (FAILED(hr))
+            {
+                wprintf(L"Error creating ApplicationActivationManager");
+            }
+            else
+            {
+                hr = CoAllowSetForegroundWindow(aam, nullptr);
+                if (FAILED(hr))
+                {
+                    wprintf(L"Error calling CoAllowSetForegroundWindow");
+                }
+                else
+                {
+                    hr = ActivateApp(aam, argv[1]);
+                    if (FAILED(hr))
+                    {
+                        wprintf(L"Error calling ActivateApplication");
+                    }
+                }
+
+                aam->Release();
+            }
+
+            CoUninitialize();
+        }
     }
 
-    CComPtr<IApplicationActivationManager> aam = nullptr;
-    hr = CoCreateInstance(CLSID_ApplicationActivationManager, nullptr, CLSCTX_LOCAL_SERVER, IID_PPV_ARGS(&aam));
-    if (FAILED(hr))
-    {
-        wprintf(L"Error creating ApplicationActivationManager");
-        CoUninitialize();
-        return hr;
-    }
-
-    hr = CoAllowSetForegroundWindow(aam, nullptr);
-    if (FAILED(hr))
-    {
-        wprintf(L"Error calling CoAllowSetForegroundWindow");
-        CoUninitialize();
-        return hr;
-    }
-
-    unsigned long pid = 0;
-    hr = aam->ActivateApplication(appId, nullptr, AO_NONE, &pid);
-    if (FAILED(hr))
-    {
-        wprintf(L"Error calling ActivateApplication");
-        CoUninitialize();
-        return hr;
-    }
-
-    CoUninitialize();
     return hr;
 }
