@@ -19,7 +19,7 @@ int wmain(int argc, wchar_t* argv[])
     if (argc < 2)
     {
         hr = E_INVALIDARG;
-        wprintf(L"Supply an app ID (AppUserModelId) for the application to launch.");
+        wprintf(L"Supply an app ID (AppUserModelId) for the application to activate.");
     }
     else
     {
