@@ -12,6 +12,10 @@
         "url": "http://github.com/NobleJS/WinningJS-activator/issues"
     },
     "scripts": {
-        "preinstall": "install.cmd"
-    }
+        "preinstall": "preinstall.cmd"
+    },
+    "bin": {
+        "WinningJS-activator": "./src/Release/WinningJS-activator.exe"
+    },
+    "os": ["win32"]
 }
