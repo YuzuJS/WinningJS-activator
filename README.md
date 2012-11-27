@@ -1,9 +1,20 @@
 # Activates Windows 8 Applications
 
-This is the a simple command-line app that activates a Windows 8 application. It takes as its sole parameter an
-“application user model ID,” which is a somewhat-cryptic string that identifies apps throughout Windows 8.
+This is a simple command-line app and/or Node.js library that activates a Windows 8 application. It takes as its sole
+parameter an “application user model ID,” which is a somewhat-cryptic string that identifies apps throughout Windows 8.
 
-After installing, you can use it like so:
+You can use it from JavaScript like so:
+
+```js
+var activate = require("winningjs-activator");
+
+activate("Microsoft.BingWeather_8wekyb3d8bbwe!App", function (err) {
+    // If `err` doesn't exist, your app is activated and showing on the user's screen!
+    // Otherwise it contains an informative error message with an HRESULT.
+});
+```
+
+or if you install it globally, you can use it from the command line:
 
 ```
 C:\> WinningJS-activator Microsoft.BingWeather_8wekyb3d8bbwe!App
@@ -18,21 +29,12 @@ tool through [npm][], the Node.js package manager. You'll need to have Visual St
 [free edition][] works fine), but if you do, then just type
 
 ```
-C:\> npm install -g WinningJS-activator
+C:\> npm install winningjs-activator
 ```
 
-and it will download the source, compile it, and install an executable in your PATH.
-
-## Future Work
-
-It's likely I'll expand this in the near future to [extract][] the application user model ID from the AppX manifest,
-so that you can just point the activator at your package name or package manifest or folder or something else easier to
-find. That might necessitate moving to C# and P/Invoke since damn guys, this C++ shit is annoying.
-
-More importantly, this will be a dependency of the forthcoming WinningJS-activate, which will allow you to activate
-Windows 8 applications from Node.js.
+and it will download the source and compile it into something ready for you to use. As mentioned above, if you want it
+as a general command-line tool, just add the `-g` flag and it will be placed in your PATH.
 
 [MSDN article]: http://blogs.msdn.com/b/windowsappdev/archive/2012/09/04/automating-the-testing-of-windows-8-apps.aspx
-[extract]: http://msdn.microsoft.com/en-us/library/windows/desktop/hh446702%28v=vs.85%29.aspx
 [npm]: https://npmjs.org/
 [free edition]: http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-for-windows-8

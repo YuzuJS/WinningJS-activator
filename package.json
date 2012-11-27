@@ -1,5 +1,5 @@
 {
-    "name": "WinningJS-activator",
+    "name": "winningjs-activator",
     "description": "Activates Windows 8 applications from the command line",
     "version": "1.0.0",
     "author": "Domenic Denicola <domenic@domenicdenicola.com> (http://domenicdenicola.com)",
@@ -17,5 +17,6 @@
     "bin": {
         "WinningJS-activator": "./src/Release/WinningJS-activator.exe"
     },
+    "main": "lib/js-bridge.js",
     "os": ["win32"]
 }
